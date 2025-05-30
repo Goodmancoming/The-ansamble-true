@@ -67,97 +67,7 @@
                 <p>
                     All the information about the tetralogy of [:Story untold, Truth unfolds:] and its universe. Dont forgot to check the fanarts
                 </p>
-                <div class="flexbox">
-
-                    <div class="items" id="char-database">
-                        <hr>
-                        <center>
-                            <a href="">
-                                [:Char-Databases:]
-                            </a>
-
-                        </center>
-                        <hr>
-                        
-                    </div>
-                    <div class="items" id="detailed-timeline">
-                        <hr>
-                        <center>
-                            <a href="">
-                                [:Detailed-Timeline:]
-                            </a>
-
-                        </center>
-                        <hr>
-                        
-                    </div>
-                    <div class="items" id="ulterior-message">
-                        <hr>
-                        <center>
-                            <a href="">
-                                [:Ulterior-Message:]
-                            </a>
-
-                        </center>
-                        <hr>
-                        
-                    </div>
-                    <div class="items" id="possible-plotholes">
-                        <hr>
-                        <center>
-                            <a href="">
-                                [:Possible-Plotholes:]
-                            </a>
-
-                        </center>
-                        <hr>
-                        
-                    </div>
-
-                    <div class="items" id="fictional-science">
-                        <hr>
-                        <center>
-                            <a href="">
-                                [:Fictional-Science:]
-                            </a>
-
-                        </center>
-                        <hr>
-                        
-                    </div>
-                    <div class="items" id="worldbuilding">
-                        <hr>
-                        <center>
-                            <a href="">
-                                [:World-Building:]
-                            </a>
-
-                        </center>
-                        <hr>
-                        
-                    </div>
-                    <div class="items" id="fan-theories">
-                        <hr>
-                        <center>
-                            <a href="">
-                                [:Fan-Theories:]
-                            </a>
-
-                        </center>
-                        <hr>
-                        
-                    </div>
-                    <div class="items" id="fan-art">
-                        <hr>
-                        <center> 
-                            <a href="">
-                                [:Fan-Arts:]
-                            </a>
-
-                        </center>
-                        <hr>
-                        
-                    </div>
+                <div class="flexbox" id="grid-container">
                     </div>
                 </div>
             </div>
@@ -190,5 +100,33 @@
 
     </div>
 </body>
+
+  <script>
+    const itemsData = [
+      { id: "char-database",        text: "[:Char-Databases:]",      href: "" },
+      { id: "detailed-timeline",    text: "[:Detailed-Timeline:]",   href: "" },
+      { id: "ulterior-message",     text: "[:Ulterior-Message:]",    href: "" },
+      { id: "possible-plotholes",   text: "[:Possible-Plotholes:]",  href: "" },
+      { id: "fictional-science",    text: "[:Fictional-Science:]",   href: "" },
+      { id: "worldbuilding",        text: "[:World-Building:]",      href: "" },
+      { id: "fan-theories",         text: "[:Fan-Theories:]",        href: "" },
+      { id: "fan-art",              text: "[:Fan-Arts:]",            href: "" },
+    ];
+
+    const container = document.getElementById('grid-container');
+
+    itemsData.forEach(item => {
+      const div = document.createElement('div');
+      div.className = 'item-link';
+      div.id = item.id;
+
+      const link = document.createElement('a');
+      link.href = item.href;
+      link.textContent = item.text;
+
+      div.appendChild(link);
+      container.appendChild(div);
+    });
+  </script>
 </html>
 
