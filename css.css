@@ -11,7 +11,6 @@
     font-size: 20px;
     width: 99%;
     min-block-size: 1px;
-    
 }
 
 /* *{
@@ -33,7 +32,27 @@ body{
     color: white;
     font-family: 'Courier New', Courier, monospace;
     font-size: 20px;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
+/* ======id id id id=============================================================================================================================================== */
+#id1{
+    margin-top: calc(2vh + 3rem);
+}
+#id2{
+    
+}
+#id3{
+    
+}
+#id4{
+    
+}
+#id5{
+    
+}
+
 /*==============================================================================================================================================*/
 a{
     text-decoration: none;
@@ -137,7 +156,7 @@ a:hover {
 }
 
 .minitext{
-    font-size: 15px;
+    font-size: calc(1.75vw + 1px);
     font-family:'Courier New', Courier, monospace;
     color: white;
     font-weight: lighter;
@@ -184,10 +203,11 @@ a:hover {
 /* images ======================================================================================================================================*/
 .center-image {
     position: absolute;
-    top: -5%;
+    top: calc(20vw + 1rem);
     left: 50%;
     transform: translateX(-50%);
     max-width: 100rem;
+    min-width: 50rem;
     z-index: 2;
     overflow: hidden;
 }
@@ -267,16 +287,16 @@ a:hover {
     cursor: help;
 }
 @media (max-width: 768px) {
-    .flexbox {
-        grid-template-columns: 1fr;
-    }
-  .item-link {
+.flexbox {
+    grid-template-columns: 1fr;
+}
+.item-link {
     flex: 0 0 100%;
-  }
+}
 
-  .item-link > a {
+.item-link > a {
     font-size: calc(2vw + 6px);
-  }
+}
 }
 
 #char-database{
