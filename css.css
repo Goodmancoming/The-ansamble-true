@@ -147,8 +147,7 @@ a:hover {
 /* typhography =================================================================================================================================*/
 /*==============================================================================================================================================*/
 .title{
-    min-block-size: 10px;
-    font-size: 50px;
+    font-size:calc(7vw + 1rem);
     font-family:'Times New Roman', Times, serif;
     color: white;
     text-align: center;
@@ -156,10 +155,11 @@ a:hover {
 }
 
 .minitext{
-    font-size: calc(1.75vw + 1px);
+    font-size: clamp(.5rem, calc(1.75vw + 1px), 1.1rem);
     font-family:'Courier New', Courier, monospace;
     color: white;
     font-weight: lighter;
+    
 }
 
 /*==============================================================================================================================================*/
@@ -203,11 +203,11 @@ a:hover {
 /* images ======================================================================================================================================*/
 .center-image {
     position: absolute;
-    top: calc(20vw + 1rem);
+    top: clamp(1vw,calc(20vw + 1rem),calc(5rem - (2vh * 1.5)));
     left: 50%;
     transform: translateX(-50%);
-    max-width: 100rem;
-    min-width: 50rem;
+    max-width: 90rem;
+    min-width: calc(50rem + 10vw);
     z-index: 2;
     overflow: hidden;
 }
@@ -219,7 +219,7 @@ a:hover {
 }
 .article {
     margin-top: calc(10vw + 1rem);
-    width: 35%;
+    width: 40vw;
     background: transparent;
     padding: 1rem;
     box-sizing: border-box;
