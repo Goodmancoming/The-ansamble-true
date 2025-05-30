@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dynamic Flexbox Grid</title>
+  <link rel="stylesheet" href="css.css">
+    
+  </style>
+</head>
+<body>
+<div class="container" id="grid-container"></div>
+
+  <script>
+    const itemsData = [
+      { id: "char-database",        text: "[:Char-Databases:]",      href: "" },
+      { id: "detailed-timeline",    text: "[:Detailed-Timeline:]",   href: "" },
+      { id: "ulterior-message",     text: "[:Ulterior-Message:]",    href: "" },
+      { id: "possible-plotholes",   text: "[:Possible-Plotholes:]",  href: "" },
+      { id: "fictional-science",    text: "[:Fictional-Science:]",   href: "" },
+      { id: "worldbuilding",        text: "[:World-Building:]",      href: "" },
+      { id: "fan-theories",         text: "[:Fan-Theories:]",        href: "" },
+      { id: "fan-art",              text: "[:Fan-Arts:]",            href: "" },
+    ];
+
+    const container = document.getElementById('grid-container');
+
+    itemsData.forEach(item => {
+      const div = document.createElement('div');
+      div.className = 'item-link';
+      div.id = item.id;
+
+      const link = document.createElement('a');
+      link.href = item.href;
+      link.textContent = item.text;
+
+      div.appendChild(link);
+      container.appendChild(div);
+    });
+  </script>
+
+</body>
+</html>

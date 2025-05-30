@@ -139,7 +139,11 @@ a:hover {
     height: auto;
     min-height: 250px;
     margin-bottom: 50px;
-    padding: 1rem;
+    padding: 1vw;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    flex: 0 0 25%; 
+    max-width: calc(90vw + 2px);
 }
 
 /*==============================================================================================================================================*/
@@ -154,7 +158,7 @@ a:hover {
 }
 
 .flexbox{
-    flex-direction: row;
+    flex-direction: column;
     display: flex;
     flex-wrap: nowrap;
     position: relative;
@@ -186,35 +190,78 @@ a:hover {
     box-sizing: border-box;
 }
 /*==============================================================================================================================================*/
-/* links =======================================================================================================================================*/#char-database,
-#detailed-timeline,
-#ulterior-message,
-#possible-plotholes,
-#fictional-science,
-#worldbuilding,
-#fan-theories,
-#fan-art {
-    background-repeat: no-repeat;
-    background-size: 100% auto;
-    background-position: center;
-    filter: contrast(1.5);
-    transition: 2500ms ease-in-out;
-    cursor: pointer;
-    z-index: 1;
-}
+/* links =======================================================================================================================================*/
 
-#char-database:hover,
-#detailed-timeline:hover,
-#ulterior-message:hover,
-#possible-plotholes:hover,
-#fictional-science:hover,
-#worldbuilding:hover,
-#fan-theories:hover,
-#fan-art:hover {
+
+.test-link:hover {
     filter: contrast(1);
     transition: 500ms ease-in-out;
     transform: scale(1.1);
     z-index: 2;
+}
+
+.item-link{
+     filter: contrast(1.5);
+      aspect-ratio: 3 / 1;
+      background-size: cover;
+      background-position: center;
+      border-radius: calc(1vw + 1px);
+      color: white;
+      font-weight: bold;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+      cursor: pointer;
+      transition: 1000ms ease-in-out;
+      overflow: hidden;
+      animation: colorchange 5000ms infinite;
+      max-width: 60vw;
+}
+
+@keyframes colorchange {
+  0% {
+    border: 3px solid white;
+  }
+  50% {
+    border: 0px solid transparent;
+  }
+  100% {
+    border: 3px solid white;
+  }
+}
+
+.item-link>a{
+    font-size: calc(1.5vw + 1px);
+    transition: 500ms ease-in-out;
+}
+
+.item-link:hover>a{
+    color: white;
+    cursor: crosshair;
+    font-size: calc(2vw + .7rem);
+    transition: 500ms ease-in-out;
+}
+
+.item-link:hover {
+    filter: contrast(1);
+    transition: 500ms ease-in-out;
+    transform: scale(1.1);
+    z-index: 2;
+    cursor: help;
+}
+@media (max-width: 768px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
+  .item-link {
+    flex: 0 0 100%;
+  }
+
+  .item-link > a {
+    font-size: calc(2vw + 6px);
+  }
 }
 
 #char-database{
