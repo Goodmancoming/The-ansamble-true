@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+    const loader = document.getElementById('blackhole');
+    const leftHand = document.getElementById('left-hand');
+    const rightHand = document.getElementById('right-hand');
+    const loaderRect = loader.getBoundingClientRect();
+    const loaderCenterX = loaderRect.left + loaderRect.width / 2;
+    const loaderCenterY = loaderRect.top + loaderRect.height / 2;
+    const maxDistance = window.innerWidth * 0.2; // 20vw
+    document.addEventListener('mousemove', (e) => {
+        const dx = e.clientX - loaderCenterX;
+        const dy = e.clientY - loaderCenterY;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        // Only affect if within 20vw
+        if (distance < maxDistance) {
+            const distanceFactor = 1 - distance / maxDistance;
+            // Blackhole: Spin speed and size
+            const speed = 200 - distanceFactor * 150; // from 200ms to 50ms
+            const scale = 1 + distanceFactor * 1.5; 
+            loader.style.animationDuration = `${speed}ms`;
+            loader.style.transform = `scale(${scale})`;
+            // Hands: Move closer
+            const handOffset = (1 - distanceFactor) * 1; // reduce gap up to 1vw
+            leftHand.style.transform = `translateX(${handOffset}vw)`;
+            rightHand.style.transform = `translateX(-${handOffset}vw)`;
+        } else {
+            // Reset to default when outside 20vw
+            loader.style.animationDuration = `200ms`;
+            loader.style.transform = `scale(1)`;
+            leftHand.style.transform = `translateX(0)`;
+            rightHand.style.transform = `translateX(0)`;
+        }
+    });
+});
+</script>
+
+    <style>
+        *{
+            color: white;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #0f0f0f;
+        }
+        .loader-container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 10vw;
+            width: 95vw;
+            border: #ffffff 1px solid;
+        }
+        .loader {
+            width: 60px;
+            aspect-ratio: 1 / 1;
+            border: 5px solid transparent;
+            border-top-color: linear-gradient(to left, white, transparent, ); /* Fixed border */
+            border-radius: 100%;
+            animation: spin 200ms linear infinite;
+            box-shadow: 0 0 100px rgba(255,255,255,1);
+            color: white;
+            text-align: center;
+            transition: transform 0.2s ease, animation-duration 0.2s ease;
+        }
+        .loader:hover {
+            animation-duration: 10000ms;
+            box-shadow: 0 0 50px rgba(255,255,255,.5);
+            cursor: url(source_img/cursorpack/cursorpack\ question.png), auto;
+        }
+
+        .loader>a:hover{
+            cursor: url(source_img/cursorpack/cursorpack\ GM.png), auto;
+        }
+        @keyframes spin {
+            to {
+                transform: rotate(-360deg);
+                box-shadow: 0 0 10px rgba(255,255,255,.9);
+            }
+        }
+        .loader>a {
+            color: white;
+            text-decoration: none;
+            font-size: 2.4rem;
+            color: #2f2f2f;
+        }
+
+        #right-hand,
+        #left-hand {
+        aspect-ratio: 1 / 1;
+        width: calc(25vw - 20px);
+        background-color: transparent;
+        box-shadow: 0 0 20px rgba(255,255,255,.5);
+        transition: transform 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="loader-container">
+        <img src="" alt="L" id="left-hand">
+        <div class="loader" id="blackhole"><a href="">.</a></div>
+        <img src="" alt="R" id="right-hand">
+    </div>
+</body>
+</html>
