@@ -11,8 +11,6 @@
     font-size: 20px;
     width: 99%;
     min-block-size: 1px;
-    overflow-x: hidden;
-    overflow-y: auto;
 }
 
 /* *{
@@ -36,6 +34,8 @@ body{
     font-size: 20px;
     scroll-behavior: smooth;
     align-items: center;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 /* ======id id id id=============================================================================================================================================== */
 #id1{
