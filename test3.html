@@ -6,42 +6,45 @@
     <title>Document</title>
     <script>
     document.addEventListener('DOMContentLoaded', () => {
-    const loader = document.getElementById('blackhole');
-    const leftHand = document.getElementById('left-hand');
-    const rightHand = document.getElementById('right-hand');
-    const loaderRect = loader.getBoundingClientRect();
-    const loaderCenterX = loaderRect.left + loaderRect.width / 2;
-    const loaderCenterY = loaderRect.top + loaderRect.height / 2;
-    const maxDistance = window.innerWidth * 0.2; // 20vw
-    document.addEventListener('mousemove', (e) => {
-        const dx = e.clientX - loaderCenterX;
-        const dy = e.clientY - loaderCenterY;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-        // Only affect if within 20vw
-        if (distance < maxDistance) {
-            const distanceFactor = 1 - distance / maxDistance;
-            // Blackhole: Spin speed and size
-            const speed = 200 - distanceFactor * 150; // from 200ms to 50ms
-            const scale = 1 + distanceFactor * 1.5; 
-            loader.style.animationDuration = `${speed}ms`;
-            loader.style.transform = `scale(${scale})`;
-            // Hands: Move closer
-            const handOffset = (1 - distanceFactor) * 1; // reduce gap up to 1vw
-            leftHand.style.transform = `translateX(${handOffset}vw)`;
-            rightHand.style.transform = `translateX(-${handOffset}vw)`;
-        } else {
-            // Reset to default when outside 20vw
-            loader.style.animationDuration = `200ms`;
-            loader.style.transform = `scale(1)`;
-            leftHand.style.transform = `translateX(0)`;
-            rightHand.style.transform = `translateX(0)`;
-        }
+        const loader = document.getElementById('blackhole');
+        const leftHand = document.getElementById('left-hand');
+        const rightHand = document.getElementById('right-hand');
+        const maxDistance = window.innerWidth * 0.1; // 20vw
+
+        document.addEventListener('mousemove', (e) => {
+            const loaderRect = loader.getBoundingClientRect();
+            const loaderCenterX = loaderRect.left + loaderRect.width / 2;
+            const loaderCenterY = loaderRect.top + loaderRect.height / 2;
+
+            const dx = e.clientX - loaderCenterX;
+            const dy = e.clientY - loaderCenterY;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+
+            // Only affect if within 20vw
+            if (distance <= maxDistance) {
+                const distanceFactor = 1 - distance / maxDistance;
+                // Blackhole: Spin speed and size
+                const speed = 300 - distanceFactor * 250; 
+                const scale = 1 + distanceFactor * 2; 
+                loader.style.animationDuration = `${speed}ms`;
+                loader.style.transform = `scale(${scale})`;
+                // Hands: Move closer
+                const handOffset = (1 - distanceFactor) * 25; // reduce gap up to 1vw
+                leftHand.style.transform = `translateX(-${handOffset}vw)`;
+                rightHand.style.transform = `translateX(${handOffset}vw)`;
+            } else {
+                // Reset to default when outside 20vw
+                loader.style.animationDuration = `200ms`;
+                loader.style.transform = `scale(1)`;
+                leftHand.style.transform = `translateX(0)`;
+                rightHand.style.transform = `translateX(0)`;
+            }
+        });
     });
-});
-</script>
+    </script>
 
     <style>
-        *{
+        * {
             color: white;
             font-family: 'Courier New', Courier, monospace;
         }
@@ -52,6 +55,8 @@
             height: 100vh;
             margin: 0;
             background-color: #0f0f0f;
+            overflow-y: auto;
+            overflow-x: hidden;
         }
         .loader-container {
             display: flex;
@@ -64,28 +69,37 @@
         .loader {
             width: 60px;
             aspect-ratio: 1 / 1;
-            border: 5px solid transparent;
-            border-top-color: linear-gradient(to left, white, transparent, ); /* Fixed border */
+            background-color: black;
+            border: 2px solid transparent;
+            border-color: rgba(255, 255, 255, 1); /* Fixed border */
             border-radius: 100%;
-            animation: spin 200ms linear infinite;
-            box-shadow: 0 0 100px rgba(255,255,255,1);
+            animation: spin 1500ms linear infinite;
+            box-shadow: 0 0 100px rgba(255, 255, 255, 1);
             color: white;
             text-align: center;
             transition: transform 0.2s ease, animation-duration 0.2s ease;
+            scale: ;
         }
         .loader:hover {
-            animation-duration: 10000ms;
-            box-shadow: 0 0 50px rgba(255,255,255,.5);
+            box-shadow: 0 0 50px rgba(255, 255, 255, .5);
             cursor: url(source_img/cursorpack/cursorpack\ question.png), auto;
         }
 
-        .loader>a:hover{
+        .loader>a:hover {
             cursor: url(source_img/cursorpack/cursorpack\ GM.png), auto;
         }
         @keyframes spin {
-            to {
+            0% {
                 transform: rotate(-360deg);
-                box-shadow: 0 0 10px rgba(255,255,255,.9);
+                box-shadow: 0 0 5px rgba(255, 255, 255, .9);
+            }
+            50% {
+                transform: rotate(0deg);
+                box-shadow: 0 0 100px rgba(255, 255, 255, .5);
+            }
+            100% {
+                transform: rotate(360deg);
+                box-shadow: 0 0 5px rgba(255, 255, 255, .9);
             }
         }
         .loader>a {
@@ -97,19 +111,25 @@
 
         #right-hand,
         #left-hand {
-        aspect-ratio: 1 / 1;
-        width: calc(25vw - 20px);
-        background-color: transparent;
-        box-shadow: 0 0 20px rgba(255,255,255,.5);
-        transition: transform 0.3s ease;
+            aspect-ratio: auto;
+            width: calc(35vw - 20px);
+            background-color: transparent;
+            transition: transform 0.3s ease;
+        }
+
+        #right-hand {
+            z-index: 3;
+        }
+        #left-hand {
+            z-index: -3;
         }
     </style>
 </head>
 <body>
     <div class="loader-container">
-        <img src="" alt="L" id="left-hand">
-        <div class="loader" id="blackhole"><a href="">.</a></div>
-        <img src="" alt="R" id="right-hand">
+        <img src="source_img/right-hand.png" alt="L" id="right-hand">
+        <div class="loader" id="blackhole"><a href="homepage.html">.</a></div>
+        <img src="source_img/left-hand.png" alt="R" id="left-hand">
     </div>
 </body>
 </html>
