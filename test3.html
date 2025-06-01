@@ -32,12 +32,16 @@
                 const handOffset = (1 - distanceFactor) * 25; // reduce gap up to 1vw
                 leftHand.style.transform = `translateX(-${handOffset}vw)`;
                 rightHand.style.transform = `translateX(${handOffset}vw)`;
+                leftHand.style.filter = `contrast(${1 + distanceFactor/2})`;
+                rightHand.style.filter = `contrast(${1 + distanceFactor/2})`;
             } else {
                 // Reset to default when outside 20vw
                 loader.style.animationDuration = `200ms`;
                 loader.style.transform = `scale(1)`;
                 leftHand.style.transform = `translateX(0)`;
+                leftHand.style.filter = `contrast(2)`;
                 rightHand.style.transform = `translateX(0)`;
+                rightHand.style.filter = `contrast(2)`;
             }
         });
     });
@@ -49,12 +53,11 @@
             font-family: 'Courier New', Courier, monospace;
         }
         body {
-            display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #0f0f0f;
+            background-color: black;
             overflow-y: auto;
             overflow-x: hidden;
         }
@@ -69,7 +72,7 @@
         .loader {
             width: 60px;
             aspect-ratio: 1 / 1;
-            background-color: black;
+            background-color: transparent;
             border: 2px solid transparent;
             border-color: rgba(255, 255, 255, 1); /* Fixed border */
             border-radius: 100%;
@@ -78,11 +81,13 @@
             color: white;
             text-align: center;
             transition: transform 0.2s ease, animation-duration 0.2s ease;
-            scale: ;
+            transition: 500ms ease-in-out;
         }
         .loader:hover {
+            background-color: white;
             box-shadow: 0 0 50px rgba(255, 255, 255, .5);
             cursor: url(source_img/cursorpack/cursorpack\ question.png), auto;
+            transition: 500ms ease-in-out;
         }
 
         .loader>a:hover {
@@ -125,9 +130,15 @@
             z-index: -3;
             margin-top: calc(10vw - 20px);
         }
+        body>img{
+            width: 100vw;
+            height: 50vw;
+            filter: blur(1px);
+        }
     </style>
 </head>
 <body>
+    <img src="source_img/trueSINGULARITY.png" alt="">
     <div class="loader-container">
         <img src="source_img/right-hand.png" alt="L" id="right-hand">
         <div class="loader" id="blackhole"><a href="homepage.html">.</a></div>
